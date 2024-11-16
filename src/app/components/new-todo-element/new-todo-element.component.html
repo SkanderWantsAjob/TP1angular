@@ -1,0 +1,11 @@
+<div class="todo-element">
+    <strong>{{ todo.name }}</strong>
+    <p>{{ todo.content }}</p>
+  
+    <div class="actions">
+      <button *ngIf="todo.status !== 'waiting'" (click)="changeStatus('waiting')">Waiting</button>
+      <button *ngIf="todo.status !== 'in progress'" (click)="changeStatus('in progress')">In Progress</button>
+      <button *ngIf="todo.status !== 'done'" (click)="changeStatus('done')">Done</button>
+    </div>
+  </div>
+  

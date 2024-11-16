@@ -1,0 +1,45 @@
+<div class="todo-container">
+    <h2>Todos</h2>
+    <div class="new-todo">
+        <h3>Add New Todo</h3>
+        <form (ngSubmit)="addTodo()">
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" [(ngModel)]="newTodo.name" name="name" required />
+          </div>
+          <div>
+            <label for="content">Content:</label>
+            <input type="text" id="content" [(ngModel)]="newTodo.content" name="content" required />
+          </div>
+          <div>
+            <label for="status">Status:</label>
+            <select id="status" [(ngModel)]="newTodo.status" name="status">
+              <option value="waiting">Waiting</option>
+              <option value="in progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+          <button type="submit" [disabled]="!newTodo.name || !newTodo.content">Add Todo</button>
+        </form>
+      </div>
+  
+    <!-- Display todos categorized by their status -->
+    <div class="list" *ngFor="let status of ['waiting', 'in progress', 'done']">
+      <h3>{{ status | titlecase }}:</h3>
+      <ul>
+        <li *ngFor="let todo of filteredTodos(status)" (click)="selectTodo(todo)">
+          <div>
+            <strong>{{ todo.name }}</strong>
+            <p>{{ todo.content }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Detail Section: Show selected todo -->
+    <div *ngIf="selectedTodo">
+      <h3>Details</h3>
+      <app-new-todo-element [todo]="selectedTodo"></app-new-todo-element>
+    </div>
+  </div>
+  
