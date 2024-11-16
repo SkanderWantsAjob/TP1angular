@@ -1,0 +1,15 @@
+<div class="container">
+<p>ttc works!</p>
+<label for="prixInput" class="form-label">Price</label>
+
+
+<input id ="prixInput" class="form-control" [value]= "prix() " (input)="prix.set(prixInput.valueAsNumber|| 0) " type="number" #prixInput>
+<label for="q" class="form-label">QUANTITY</label>
+
+<input id= "q"class="form-control" [value]= "quantity() " (input)="quantity.set(quantityInput.valueAsNumber|| 1) " type ="number" #quantityInput>
+<label for="tva" class="form-label">TVA</label>
+
+<input id= "tva" class="form-control" [value]= "TVA()" (input)=" TVA.set(TVAInput.valueAsNumber || 18)  " type = "number"  #TVAInput>
+<br>
+<p>Total Price (TTC): {{ finalprice() }}</p>
+</div>
