@@ -1,7 +1,9 @@
+<div *ngIf="cv$ | async as cv">
 <div class="d-flex justify-content-center" *ngIf="cv">
   <div class="col-lg-8 push-lg-4">
     <div class="tab-content p-b-3">
       <div class="tab-pane active" id="profile">
+        
         <h4 class="m-y-2">Cv {{ cv.firstname }} {{ cv.name }}</h4>
         <div class="d-flex justify-content-center">
           <img width="150px" height="150px" class="rounded-circle align-content-center"
@@ -39,7 +41,9 @@
             </div>
           </div>
         </div>
+        </div>
       </div>
+      
     </div>
   </div>
 </div>
