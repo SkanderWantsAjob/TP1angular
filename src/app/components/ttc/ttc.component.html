@@ -12,4 +12,7 @@
 <input id= "tva" class="form-control" [value]= "TVA()" (input)=" TVA.set(TVAInput.valueAsNumber || 18)  " type = "number"  #TVAInput>
 <br>
 <p>Total Price (TTC): {{ finalprice() }}</p>
+<div class="container">
+   <p> On a une reduction de {{reduction() * 100 }} % MABROUK</p>
+</div>
 </div>

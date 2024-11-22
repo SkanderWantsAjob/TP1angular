@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { RainbowInputDirective } from "src/app/rainbow-input.directive";
 
 @Component({
     selector: "app-color",
     templateUrl: "./color.component.html",
     styleUrls: ["./color.component.css"],
     standalone: true,
+    imports:[RainbowInputDirective]
 })
 export class ColorComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);

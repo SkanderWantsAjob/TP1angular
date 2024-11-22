@@ -11,26 +11,28 @@ export class TTCComponent {
   quantity =signal( 1)
   TVA = signal (18)
   prix= signal(0)
-
+  // reduction = signal("")
 
   
 
-  remiseCalculator(quantite: number){
-    if (quantite>15 ){
+  reduction = computed(()=>{
+    if (this.quantity()>15 ){
+      
       return 0.3
     }
-    if (quantite > 10 ){
+    if (this.quantity() > 10 ){
       return 0.2
     }
     return 0
-  }
+  })
   calculerPrix (quantite:number, prix:number, tva:number){
 
-    return quantite*prix*(1-this.remiseCalculator(quantite))*(1+tva/100)
+    return quantite*prix*(1-this.reduction())*(1+tva/100)
   }
 
   finalprice = computed(()=> {
     return this.calculerPrix(this.quantity(), this.prix(), this.TVA())
   })
+
 
 }

@@ -67,6 +67,12 @@
                         routerLinkActive="active text-primary"
                         >Rh</a
                         >
+                        <a
+                        class="nav-link"
+                        [routerLink]="['ttc']"
+                        routerLinkActive="active text-primary"
+                        >ttc</a
+                        >
                         @if (!authService.stateIsAuthenticated()) {
                           <a
                             class="nav-link"
@@ -74,6 +80,7 @@
                             routerLinkActive="active text-primary"
                             >Login</a
                             >
+
                           }
                           @if (authService.stateIsAuthenticated()) {
                             <a
