@@ -1,11 +1,11 @@
+import { JsonPipe } from "@angular/common";
 import { Component, inject } from "@angular/core";
-import { AbstractControl, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CvService } from "../services/cv.service";
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
-import { JsonPipe } from "@angular/common";
+import { CvService } from "../services/cv.service";
 
 @Component({
     selector: "app-add-cv",

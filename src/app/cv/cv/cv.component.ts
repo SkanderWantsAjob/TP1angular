@@ -1,12 +1,12 @@
-import { Component, inject } from "@angular/core";
-import { Cv } from "../model/cv";
-import { LoggerService } from "../../services/logger.service";
+import { DatePipe, UpperCasePipe } from "@angular/common";
+import { Component, inject, signal } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { CvService } from "../services/cv.service";
-import { ListComponent } from "../list/list.component";
+import { LoggerService } from "../../services/logger.service";
 import { CvCardComponent } from "../cv-card/cv-card.component";
 import { EmbaucheComponent } from "../embauche/embauche.component";
-import { UpperCasePipe, DatePipe } from "@angular/common";
+import { ListComponent } from "../list/list.component";
+import { Cv } from "../model/cv";
+import { CvService } from "../services/cv.service";
 @Component({
     selector: "app-cv",
     templateUrl: "./cv.component.html",
@@ -25,8 +25,8 @@ export class CvComponent {
   private toastr = inject(ToastrService);
   private cvService = inject(CvService);
 
-  cvs: Cv[] = [];
-  selectedCv: Cv | null = null;
+  cvs = signal<Cv[]>([]) 
+  selectedCv= signal<Cv>(new Cv)
   /*   selectedCv: Cv | null = null; */
   date = new Date();
 
@@ -36,10 +36,10 @@ export class CvComponent {
   constructor() {
     this.cvService.getCvs().subscribe({
       next: (cvs) => {
-        this.cvs = cvs;
+        this.cvs.set(cvs);
       },
       error: () => {
-        this.cvs = this.cvService.getFakeCvs();
+        this.cvs.set(this.cvService.getFakeCvs());
         this.toastr.error(`
           Attention!! Les données sont fictives, problème avec le serveur.
           Veuillez contacter l'admin.`);
@@ -47,6 +47,6 @@ export class CvComponent {
     });
     this.logger.logger("je suis le cvComponent");
     this.toastr.info("Bienvenu dans notre CvTech");
-    this.cvService.selectCv$.subscribe((cv) => (this.selectedCv = cv));
+    this.cvService.selectCv$.subscribe((cv) => (this.selectedCv.set(cv)));
   }
 }
