@@ -37,4 +37,8 @@ export class CvComponent {
     this.currentTab = tab;
   }
 
+  onCvSelected(cv: Cv): void {
+    this.selectedCv$ =of( cv);
+  }
+
 }

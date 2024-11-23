@@ -1,6 +1,7 @@
-import { Component, inject } from "@angular/core";
-import { FormBuilder, AbstractControl } from "@angular/forms";
-import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
+import { Component, EventEmitter, inject, Output } from "@angular/core";
+import { FormBuilder, FormControl } from "@angular/forms";
+import { debounceTime, switchMap } from "rxjs";
+import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
 
 @Component({
@@ -10,9 +11,17 @@ import { CvService } from "../services/cv.service";
 })
 export class AutocompleteComponent {
   formBuilder = inject(FormBuilder);
-  cvService = inject(CvService);
-  get search(): AbstractControl {
-    return this.form.get("search")!;
+  searchControl = new FormControl('');
+  filteredCvs$ = this.searchControl.valueChanges.pipe(
+    debounceTime(300),
+    switchMap((query) => this.cvService.searchCvs(String(query))) 
+  );
+
+  @Output() selectedCv = new EventEmitter<Cv>(); 
+
+  constructor(private cvService: CvService) {}
+
+  onSelect(cv: Cv): void {
+    this.selectedCv.emit(cv); 
   }
-  form = this.formBuilder.group({ search: [""] });
 }

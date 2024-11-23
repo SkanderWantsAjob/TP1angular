@@ -1,3 +1,11 @@
-<form [formGroup]="form">
-  <input type="text" class="form-control" formControlName="search" />
-</form>
+<div class="autocomplete">
+  <input 
+    type="text" 
+    [formControl]="searchControl" 
+    class="form-control" 
+    placeholder="Search CVs by name" 
+  />
+  <div *ngIf="filteredCvs$ | async as filteredCvs">
+    <app-list [cvs]="filteredCvs"></app-list>
+  </div>
+</div>
