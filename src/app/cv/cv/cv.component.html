@@ -1,11 +1,35 @@
 <div class="row">
-  <div class="col">
+
+  <div class="col-md-6">
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
     </div>
-    <app-list [cvs]="cvs$ | async"></app-list>
+    <div>
+      <button 
+        (click)="change('junior')" 
+        [class.active]="currentTab === 'junior'" 
+        class="btn btn-primary"
+      >
+        Juniors
+      </button>
+      <button 
+        (click)="change('senior')" 
+        [class.active]="currentTab === 'senior'" 
+        class="btn btn-secondary"
+      >
+        Seniors
+      </button>
+    </div>
+    
+
+    <div *ngIf="currentTab === 'junior'">
+      <app-list [cvs]="juniorvc$ | async"></app-list>
+    </div>
+    <div *ngIf="currentTab === 'senior'">
+      <app-list [cvs]="serniorcv$ | async"></app-list>
+    </div>
   </div>
-  <div class="col">
+  <div class="col-md-5">
     <app-cv-card [cv]="selectedCv$ | async"></app-cv-card>
   </div>
 </div>

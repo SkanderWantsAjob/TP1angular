@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label for="cvSearch">Rechercher un CV</label>
+    <input type="text" id="cvSearch" class="form-control" [formControl]="cvControl" placeholder="Tapez un nom...">
+  </div>
+  <div *ngIf="cvs.length > 0" class="list-group">
+    <div *ngFor="let cv of cvs" class="list-group-item" (click)="onSelect(cv)">
+      {{ cv.name }}
+    </div>
+  </div>
+  

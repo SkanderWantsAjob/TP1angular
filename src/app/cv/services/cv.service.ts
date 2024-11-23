@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Cv } from "../model/cv";
-import { Observable, Subject } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { EMPTY, Observable, Subject } from "rxjs";
 import { API } from "../../../config/api.config";
+import { Cv } from "../model/cv";
 
 @Injectable({
   providedIn: "root",
@@ -130,5 +130,18 @@ export class CvService {
    */
   selectCv(cv: Cv) {
     this.#selectCvSuject$.next(cv);
+  }
+
+  //skander
+  searchCvs(query: string): Observable<Cv[]> {
+    if (!query) {
+      return EMPTY;
+    }
+    const params = new HttpParams().set('filter', JSON.stringify({
+      where: {
+        name: { like: `%${query}%` } // Requête avec un "like" pour la recherche
+      }
+    }));
+    return this.http.get<Cv[]>(API.cv, { params });
   }
 }

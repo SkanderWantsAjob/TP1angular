@@ -10,20 +10,31 @@ import { CvService } from "../services/cv.service";
   styleUrls: ["./cv.component.css"]
 })
 export class CvComponent {
-  cvs$: Observable<Cv[]>;
+  allcv$: Observable<Cv[]>;
+  juniorvc$: Observable<Cv[]> = new Observable<Cv[]>();
+  serniorcv$: Observable<Cv[]>  = new Observable<Cv[]>();
   selectedCv$: Observable<Cv>;
   date = new Date();
+  currentTab: 'junior' | 'senior' = 'junior';
 
   constructor(
     private logger: LoggerService,
     private toastr: ToastrService,
     private cvService: CvService
-  ) {this.cvs$ = this.cvService.getCvs().pipe(catchError(() => {
+  ) {this.allcv$ = this.cvService.getCvs().pipe(catchError(() => {
     this.toastr.error(`
               Attention!! Les données sont fictives, problème avec le serveur.
               Veuillez contacter l'admin.`);
     return of(this.cvService.getFakeCvs());
   }));
+  this.allcv$.subscribe(cvs => {
+    this.juniorvc$ = of(cvs.filter(cv => cv.age < 40));
+    this.serniorcv$ = of(cvs.filter(cv => cv.age >= 40));
+  });
   this.selectedCv$ = this.cvService.selectCv$;
-}
+  }
+  change(tab: 'junior' | 'senior'): void {
+    this.currentTab = tab;
+  }
+
 }
