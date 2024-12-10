@@ -11,6 +11,6 @@ export class CvResolver implements Resolve<Cv[]> {
   constructor(private cvService: CvService) {}
 
   resolve(): Observable<Cv[]> {
-    return this.cvService.getCvs(); 
+    return this.cvService.getCvs();
   }
 }

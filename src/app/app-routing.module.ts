@@ -8,6 +8,8 @@ import { AddCvComponent } from "./cv/add-cv/add-cv.component";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { CvComponent } from "./cv/cv/cv.component";
 import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
+import { MasterDetailComponent } from "./cv/master-detail/master-detail.component";
+import { CvResolver } from "./cv/resolver/Cv.resolver";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { AdminComponent } from "./templates/admin/admin.component";
@@ -19,7 +21,17 @@ const routes: Route[] = [
   { path: "rh", component: RhComponent },
   {
     path: "cv",
-    component: CvComponent,
+    component: CvComponent, resolve:{
+      cv: CvResolver
+    }
+  },
+  {path:"List",
+    component:MasterDetailComponent,
+    children: [
+      {
+        path:':id', component:DetailsCvComponent
+      }
+    ]
   },
   { path: "cv/add", component: AddCvComponent, canActivate: [AuthGuard] },
   { path: "cv/:id", component: DetailsCvComponent },

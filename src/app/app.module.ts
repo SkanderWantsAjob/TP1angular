@@ -30,6 +30,7 @@ import { TodoComponent } from "./todo/todo/todo.component";
 import { HighlightDirective } from "./directives/highlight.directive";
 
 import { AsyncPipe } from "@angular/common";
+import { RouterModule, RouterOutlet } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AppRoutingModule } from "./app-routing.module";
 import { AuthInterceptorProvider } from "./auth/interceptors/auth.interceptor";
@@ -43,6 +44,7 @@ import { CvCardComponent } from "./cv/cv-card/cv-card.component";
 import { EmbaucheComponent } from "./cv/embauche/embauche.component";
 import { ItemComponent } from "./cv/item/item.component";
 import { ListComponent } from "./cv/list/list.component";
+import { MasterDetailComponent } from "./cv/master-detail/master-detail.component";
 import { DefaultImagePipe } from "./cv/pipes/default-image.pipe";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { UserListComponent } from "./optimizationPattern/user-list/user-list.component";
@@ -53,6 +55,7 @@ import { TestObservableComponent } from "./rxjs/test-observable/test-observable.
 import { AdminComponent } from "./templates/admin/admin.component";
 import { FrontComponent } from "./templates/front/front.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +63,7 @@ import { FrontComponent } from "./templates/front/front.component";
     SecondComponent,
     ColorComponent,
     TwoComponent,
+    MasterDetailComponent,
     CardProfilComponent,
     PereComponent,
     FilsComponent,
@@ -96,6 +100,8 @@ import { FrontComponent } from "./templates/front/front.component";
   imports: [
     BrowserModule,
     AsyncPipe,
+    RouterModule,
+    RouterOutlet,
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added

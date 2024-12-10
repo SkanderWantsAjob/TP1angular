@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Output } from "@angular/core";
 import { FormBuilder, FormControl } from "@angular/forms";
-import { debounceTime, switchMap } from "rxjs";
+import { debounceTime, distinctUntilChanged, switchMap } from "rxjs";
 import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
 
@@ -14,6 +14,7 @@ export class AutocompleteComponent {
   searchControl = new FormControl('');
   filteredCvs$ = this.searchControl.valueChanges.pipe(
     debounceTime(300),
+    distinctUntilChanged(),
     switchMap((query) => this.cvService.searchCvs(String(query))) 
   );
 

@@ -2,11 +2,13 @@
 </div>
 <app-autocomplete (selectedCv)="onCvSelected($event)"></app-autocomplete> 
 <div>
-  <div class="col-md-6">
+  <div class="col-md-5">
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
     
-      <button 
+      
+    </div>
+    <button 
         (click)="change('junior')" 
         [class.active]="currentTab === 'junior'" 
         class="btn btn-primary"
@@ -20,7 +22,6 @@
       >
         Seniors
       </button>
-    </div>
     
 
     <div *ngIf="currentTab === 'junior'">
@@ -30,7 +31,7 @@
       <app-list [cvs]="serniorcv$ | async"></app-list>
     </div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-4">
     <app-cv-card [cv]="selectedCv$ | async"></app-cv-card>
   </div>
 </div>
